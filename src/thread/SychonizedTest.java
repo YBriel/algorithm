@@ -19,38 +19,39 @@ public class SychonizedTest {
         this.b = b;
     }
 
+    public SychonizedTest() {
+        System.out.println(Thread.currentThread().getName()+"构造方法执行了");
+    }
+
     public static synchronized void testA(){
-        System.out.println("A方法开始执行");
+        System.out.println(Thread.currentThread().getName()+"A方法开始执行");
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread().getName()+"AAAAAA");
-        System.out.println("A方法开始完毕");
+        System.out.println(Thread.currentThread().getName()+"A方法执行完毕");
     }
 
 
-    public  synchronized void testB(){
-        System.out.println("B方法开始开始");
+    public   void testB(){
+        System.out.println(Thread.currentThread().getName()+"B方法开始开始");
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread().getName()+"BBB");
-        System.out.println("B方法开始完毕");
+        System.out.println(Thread.currentThread().getName()+"B方法执行完毕");
     }
 
     public void testC(){
-        System.out.println("C方法开始开始");
+        System.out.println(Thread.currentThread().getName()+"C方法开始执行");
         try {
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread().getName()+"CCC");
-        System.out.println("C方法开始完毕");
+        System.out.println(Thread.currentThread().getName()+"C方法执行完毕");
     }
     public static void main(String[] args) {
         SychonizedTest test=new SychonizedTest();
@@ -60,12 +61,9 @@ public class SychonizedTest {
         test.testB();
         test.testA();*/
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                test.testA();
-                test.testB();
-            }
+        new Thread(()-> {
+            test.testA();
+            test.testB();
         },"第一个").start();
 
 
@@ -78,5 +76,10 @@ public class SychonizedTest {
                 //a=2;
             }
         },"第二个").start();
+
+        new Thread(() -> {
+            test.testA();
+            test1.testA();
+        }, "第三个").start();
     }
 }
