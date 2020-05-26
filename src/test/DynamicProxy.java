@@ -15,7 +15,12 @@ public class DynamicProxy implements InvocationHandler {
 
     private Object bind(Object object){
         this.object=object;
+        //return Proxy.newProxyInstance(object.getClass().getClassLoader(),object.getClass().getInterfaces(),this);
         return Proxy.newProxyInstance(object.getClass().getClassLoader(),object.getClass().getInterfaces(),this);
+    }
+
+    public void sayHello(String a,int b){
+        System.out.println("Hello ..."+a+b);
     }
 
     @Override
@@ -40,5 +45,6 @@ public class DynamicProxy implements InvocationHandler {
         hello.sayHello();
         hello.sayHello1();
         hello.sayHello2();
+
     }
 }
