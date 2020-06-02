@@ -17,6 +17,7 @@ public class CountdownLatch {
             new Thread(() -> {
                 System.out.println(Thread.currentThread().getName()+"离开...");
                 countDownLatch.countDown();
+
             }, CountryEnum.forEachCountry(i)!=null ? (CountryEnum.forEachCountry(i).getRetMsg()==null?"ss":CountryEnum.forEachCountry(i).getRetMsg()):"ss").start();
         }
         countDownLatch.await();

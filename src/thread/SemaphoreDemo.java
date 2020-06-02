@@ -13,6 +13,10 @@ public class SemaphoreDemo {
     public static void main(String[] args) {
         Semaphore semaphore=new Semaphore(3);
 
+
+        new Thread(()->{
+
+            },"").start();
         for (int i = 0; i < 6; i++) {
             new Thread(() -> {
                 try {

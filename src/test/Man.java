@@ -7,6 +7,7 @@ package test;
  */
 public class Man {
 
+
     private String name;
 
     public String getName() {
